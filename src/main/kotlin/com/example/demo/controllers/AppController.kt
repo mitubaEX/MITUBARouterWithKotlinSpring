@@ -1,10 +1,11 @@
-package com.example.demo
+package com.example.demo.controllers
 
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
+import com.example.demo.models.User
 
 @RestController
-class DemoController() {
+class AppController() {
 
 	@GetMapping("/user")
     fun getUser(): User {
