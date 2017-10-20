@@ -29,7 +29,7 @@ class AppController() {
 	@PostMapping("/file")
     fun  registerUserRequest(@RequestPart("file") file: MultipartFile,
                              @RequestPart("birthmark") birthmark: String,
-                             @RequestPart("threshold") threshold: String): List<String> {
+                             @RequestPart("threshold") threshold: String): List<String?> {
         val poster = BirthmarkPoster()
         val result = File(BirthmarkExtracter(file, birthmark).extract()).readLines()
                 .map { n ->  n.split(Regex(","), 4) }
