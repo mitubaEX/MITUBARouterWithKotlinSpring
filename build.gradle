@@ -35,6 +35,8 @@ repositories {
 	mavenCentral()
 	maven { url "https://repo.spring.io/snapshot" }
 	maven { url "https://repo.spring.io/milestone" }
+    mavenLocal()
+    maven { url 'https://jitpack.io' }
 }
 
 
@@ -44,5 +46,10 @@ dependencies {
 	compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
 	compile("org.springframework.boot:spring-boot-starter-web")
 	compile("org.jetbrains.kotlin:kotlin-stdlib")
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile group: 'com.github.pochi', name: 'pochi-runner', version:'1.0-SNAPSHOT'
+    compile 'com.github.frendyxzc:KHttp:0.0.6'
+    // https://mvnrepository.com/artifact/org.json/json
+    compile group: 'org.json', name: 'json', version: '20170516'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
