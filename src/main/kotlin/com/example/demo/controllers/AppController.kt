@@ -31,9 +31,11 @@ class AppController() {
                              @RequestPart("birthmark") birthmark: String,
                              @RequestPart("threshold") threshold: String): List<String?> {
         val poster = BirthmarkPoster()
+        /* val result = File(BirthmarkExtracter(file, birthmark).extract()).readLines()                          */
+        /*         .map { n ->  n.split(Regex(","), 4) }                                                         */
+        /*         .filter { n -> n.size >= 4 }.map{ n -> n[3]}.map{ n -> poster.post(n, birthmark, threshold) } */
         val result = File(BirthmarkExtracter(file, birthmark).extract()).readLines()
-                .map { n ->  n.split(Regex(","), 4) }
-                .filter { n -> n.size >= 4 }.map{ n -> n[3]}.map{ n -> poster.post(n, birthmark, threshold) }
+            .map{ n -> poster.post(n, birthmark, threshold) }
         return result
     }
 
