@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile
 import com.example.demo.models.User
 import com.example.demo.services.BirthmarkExtracter
 import com.example.demo.services.BirthmarkPoster
+import org.springframework.http.HttpStatus
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
@@ -42,4 +43,16 @@ class AppController() {
 	@GetMapping("/{name}")
 	fun helloName(@PathVariable name:String)
 			= name
+
+    /** Cause an error to occur */
+    @RequestMapping("/raiseError")
+    fun raiseError() {
+        throw IllegalArgumentException("This shouldn't have happened")
+    }
+
+    /** Handle the error */
+    @ExceptionHandler(IllegalArgumentException::class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    fun handleError(e: IllegalArgumentException) = e.message
+
 }
