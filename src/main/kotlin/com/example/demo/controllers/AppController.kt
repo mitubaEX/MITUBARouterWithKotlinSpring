@@ -6,9 +6,7 @@ import com.example.demo.models.User
 import com.example.demo.services.BirthmarkExtracter
 import com.example.demo.services.BirthmarkPoster
 import org.springframework.http.HttpStatus
-import java.io.BufferedReader
 import java.io.File
-import java.io.FileReader
 
 @RestController
 class AppController() {
@@ -32,9 +30,6 @@ class AppController() {
                              @RequestPart("birthmark") birthmark: String,
                              @RequestPart("threshold") threshold: String): List<String?> {
         val poster = BirthmarkPoster()
-        /* val result = File(BirthmarkExtracter(file, birthmark).extract()).readLines()                          */
-        /*         .map { n ->  n.split(Regex(","), 4) }                                                         */
-        /*         .filter { n -> n.size >= 4 }.map{ n -> n[3]}.map{ n -> poster.post(n, birthmark, threshold) } */
         val result = File(BirthmarkExtracter(file, birthmark).extract()).readLines()
             .map{ n -> poster.post(n, birthmark, threshold) }
         return result
