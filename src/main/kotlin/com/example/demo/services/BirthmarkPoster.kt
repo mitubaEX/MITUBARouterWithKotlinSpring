@@ -1,14 +1,27 @@
 package com.example.demo.services
 
+import com.natpryce.konfig.*
+import com.natpryce.konfig.ConfigurationProperties.Companion.systemProperties
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import org.json.JSONObject
+import java.io.File
+
+object server : PropertyGroup(){
+    val port by intType
+    val host by stringType
+}
 
 class BirthmarkPoster(){
     fun post(data: String, birthmark: String, threshold: String): String?{
-        val url = "http://localhost:9000/search"
+        // conf/server.propertiesを参照する
+        val config = systemProperties() overriding
+                EnvironmentVariables() overriding
+                ConfigurationProperties.fromFile(File("./conf/server.properties"))
+
+        val url = "http://${config[server.host]}:${config[server.port]}/search"
         val client: OkHttpClient = OkHttpClient.Builder().build()
 
         // create json
